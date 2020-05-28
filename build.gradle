@@ -2,9 +2,6 @@ plugins {
     id 'java'
     id 'org.jetbrains.kotlin.jvm' version '1.3.71'
 }
-def config = rootProject.file("config.properties");
-def configProperties = new Properties()
-configProperties.load(new FileInputStream(config))
 
 repositories {
     mavenCentral()
