@@ -8,7 +8,8 @@ import java.util.*
 
 
 suspend fun main() {
-    val client = Kord(loadToken())
+    val properties=loadProperties()
+    val client = Kord(properties.getProperty("TOKEN"))
     client.on<ReadyEvent>{
         println("Logged in")
     }
@@ -37,5 +38,10 @@ fun loadToken(): String {
     val properties: Properties = Properties()
     properties.load(File("config.properties").inputStream())
     return properties.getProperty("TOKEN")
+}
+fun loadProperties(): Properties {
+        val properties: Properties = Properties()
+        properties.load(File("config.properties").inputStream())
+        return properties
 }
 
