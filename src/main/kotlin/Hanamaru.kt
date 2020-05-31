@@ -10,8 +10,12 @@ import java.util.*
 suspend fun main() {
     val properties=loadProperties()
     val client = Kord(properties.getProperty("TOKEN"))
+
     client.on<ReadyEvent>{
         println("Logged in")
+        client.editPresence {
+            playing(properties.getProperty("GAME"))
+        }
     }
     client.on<MessageCreateEvent> {
         val content=message.content
