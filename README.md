@@ -9,3 +9,14 @@ Example of non-triggers:
 - `:monkaS: :kekw:`
 # Just that? Really?
 Yes
+
+# Requirements: 
+- `Java 8`
+- `config.properties` file with following values (can be out of order)
+```
+TOKEN=<YOURTOKEN>
+GAME=<YOURGAME>
+```
+
+# How to Run
+`java -jar hanamaru.jar`
