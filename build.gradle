@@ -1,5 +1,4 @@
 plugins {
-    id 'java'
     id 'org.jetbrains.kotlin.jvm' version '1.3.71'
 }
 
@@ -25,10 +24,7 @@ compileTestKotlin {
 
 jar {
     manifest {
-        attributes 'Main-Class': "HanamaruKt",
-        'Implementation-Title' : 'Gradle Build zura',
-        'IMplementation-Version' : '1.0'
-
+        attributes 'Main-Class': "HanamaruKt"
     }
     from {
         configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) }
