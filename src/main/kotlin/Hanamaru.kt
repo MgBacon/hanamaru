@@ -19,7 +19,6 @@ suspend fun main() {
     }
     client.on<MessageCreateEvent> {
         val content=message.content
-        println(content)
         //if null, it's not a singular emote message so we just abort
         val url=searchMessageForEmote(content)?: return@on
         message.getChannel().createEmbed {
