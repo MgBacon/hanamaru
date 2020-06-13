@@ -3,6 +3,8 @@ import com.gitlab.kordlib.core.behavior.channel.createEmbed
 import com.gitlab.kordlib.core.event.gateway.ReadyEvent
 import com.gitlab.kordlib.core.event.message.MessageCreateEvent
 import com.gitlab.kordlib.core.on
+import io.ktor.client.HttpClient
+import io.ktor.client.request.post
 import java.io.File
 import java.util.*
 
@@ -54,3 +56,18 @@ fun searchMessageForEmote(content: String): String? {
     return null
 }
 
+suspend fun translateEngToJap(text: String) {
+    translate(text, "EN", "JA")
+}
+
+suspend fun translateJapToEng(text: String) {
+    translate(text, "JA", "EN")
+}
+
+suspend fun translate(text: String, sourceLang: String, targetLang: String) {
+    val url = "https://www2.deepl.com/jsonrpc"
+    val timestamp=System.currentTimeMillis()
+    val query="{\"jsonrpc\":\"2.0\",\"method\" : \"LMT_handle_jobs\",\"params\":{\"jobs\":[{\"kind\":\"default\",\"raw_en_sentence\":\"$text\",\"raw_en_context_before\":[],\"raw_en_context_after\":[],\"quality\":\"fast\"}],\"lang\":{\"user_preferred_langs\":[\"DE\",\"NL\",\"ZH\",\"EN\",\"JA\"],\"source_lang_user_selected\":\"$sourceLang\",\"target_lang\":\"$targetLang\"},\"priority\":20,\"commonJobParams\":{},\"timestamp\":$timestamp},\"id\":86190023}"
+    val client = HttpClient()
+    val response=client.post<String>(url){ body=query }
+}
